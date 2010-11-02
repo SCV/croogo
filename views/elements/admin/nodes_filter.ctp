@@ -40,6 +40,14 @@
         'empty' => true,
         'value' => $filterPromote,
     ));
+    $filterSearch = '';
+    if (isset($this->params['named']['q'])) {
+        $filterSearch = $this->params['named']['q'];
+    }
+    echo $form->input('Query.q', array(
+        'label' => __('Search', true),
+        'value' => $filterSearch,
+    ));
     echo $form->end(__('Filter', true));
 ?>
 </div>
