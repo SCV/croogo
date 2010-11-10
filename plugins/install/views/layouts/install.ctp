@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo $title_for_layout; ?> - <?php __('Croogo'); ?></title>
     <?php
-        echo $html->css(array(
+        echo $this->Html->css(array(
             'reset',
             '960',
             'admin',
@@ -24,7 +24,7 @@
         <div id="main">
             <div id="install">
             <?php
-                $layout->sessionFlash();
+                $this->Layout->sessionFlash();
                 echo $content_for_layout;
             ?>
             </div>

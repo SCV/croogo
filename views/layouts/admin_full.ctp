@@ -4,16 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo $title_for_layout; ?> - <?php __('Croogo'); ?></title>
     <?php
-        echo $html->script(array('jquery/jquery.min'));
-        echo $layout->js();
-        echo $html->css(array(
+        echo $this->Html->css(array(
             'reset',
             '960',
             '/ui-themes/smoothness/jquery-ui.css',
             'admin',
             'thickbox',
         ));
-        echo $html->script(array(
+        echo $this->Layout->js();
+        echo $this->Html->script(array(
+            'jquery/jquery.min',
             'jquery/jquery-ui.min',
             'jquery/jquery.uuid',
             'jquery/jquery.cookie',
@@ -50,7 +50,7 @@
             <div class="grid_16">
                 <div id="content">
                     <?php
-                        $layout->sessionFlash();
+                        $this->Layout->sessionFlash();
                         echo $content_for_layout;
                     ?>
                 </div>

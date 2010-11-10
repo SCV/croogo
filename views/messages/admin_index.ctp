@@ -3,8 +3,8 @@
 
     <div class="actions">
         <ul>
-            <li><?php echo $html->link(__('Unread', true), array('action'=>'index', 'filter' => 'status:0;')); ?></li>
-            <li><?php echo $html->link(__('Read', true), array('action'=>'index', 'filter' => 'status:1;')); ?></li>
+            <li><?php echo $this->Html->link(__('Unread', true), array('action'=>'index', 'filter' => 'status:0;')); ?></li>
+            <li><?php echo $this->Html->link(__('Read', true), array('action'=>'index', 'filter' => 'status:1;')); ?></li>
         </ul>
     </div>
 
@@ -16,10 +16,10 @@
         }
     ?>
 
-    <?php echo $form->create('Message', array('url' => array('controller' => 'messages', 'action' => 'process'))); ?>
+    <?php echo $this->Form->create('Message', array('url' => array('controller' => 'messages', 'action' => 'process'))); ?>
     <table cellpadding="0" cellspacing="0">
     <?php
-        $tableHeaders =  $html->tableHeaders(array(
+        $tableHeaders =  $this->Html->tableHeaders(array(
             '',
             $paginator->sort('id'),
             $paginator->sort('contact_id'),
@@ -33,33 +33,33 @@
 
         $rows = array();
         foreach ($messages AS $message) {
-            $actions  = $html->link(__('Edit', true), array('action' => 'edit', $message['Message']['id']));
-            $actions .= ' ' . $layout->adminRowActions($message['Message']['id']);
-            $actions .= ' ' . $html->link(__('Delete', true), array(
+            $actions  = $this->Html->link(__('Edit', true), array('action' => 'edit', $message['Message']['id']));
+            $actions .= ' ' . $this->Layout->adminRowActions($message['Message']['id']);
+            $actions .= ' ' . $this->Html->link(__('Delete', true), array(
                 'action' => 'delete',
                 $message['Message']['id'],
                 'token' => $this->params['_Token']['key'],
             ), null, __('Are you sure?', true));
 
             $rows[] = array(
-                $form->checkbox('Message.'.$message['Message']['id'].'.id'),
+                $this->Form->checkbox('Message.'.$message['Message']['id'].'.id'),
                 $message['Message']['id'],
                 $message['Contact']['title'],
                 $message['Message']['name'],
                 $message['Message']['email'],
                 $message['Message']['title'],
-                $html->image('/img/icons/comment.png'),
+                $this->Html->image('/img/icons/comment.png'),
                 $actions,
             );
         }
 
-        echo $html->tableCells($rows);
+        echo $this->Html->tableCells($rows);
         echo $tableHeaders;
     ?>
     </table>
     <div class="bulk-actions">
     <?php
-        echo $form->input('Message.action', array(
+        echo $this->Form->input('Message.action', array(
             'label' => false,
             'options' => array(
                 'read' => __('Mark as read', true),
@@ -68,7 +68,7 @@
             ),
             'empty' => true,
         ));
-        echo $form->end(__('Submit', true));
+        echo $this->Form->end(__('Submit', true));
     ?>
     </div>
 </div>

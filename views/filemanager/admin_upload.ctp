@@ -5,25 +5,25 @@
     <?php
         __('You are here:');
 
-        $breadcrumb = $filemanager->breadcrumb($path);
+        $breadcrumb = $this->Filemanager->breadcrumb($path);
         foreach($breadcrumb AS $pathname => $p) {
-            echo $filemanager->linkDirectory($pathname, $p);
+            echo $this->Filemanager->linkDirectory($pathname, $p);
             echo DS;
         }
     ?>
     </div>
 
     <?php
-        echo $form->create('Filemanager', array(
+        echo $this->Form->create('Filemanager', array(
             'type' => 'file',
-            'url' => $html->url(array(
+            'url' => $this->Html->url(array(
                 'controller' => 'filemanager',
                 'action' => 'upload',
             ), true) . '?path=' . urlencode($path),
         ));
     ?>
     <fieldset>
-    <?php echo $form->input('Filemanager.file', array('type' => 'file')); ?>
+    <?php echo $this->Form->input('Filemanager.file', array('type' => 'file')); ?>
     </fieldset>
-    <?php echo $form->end("Submit"); ?>
+    <?php echo $this->Form->end("Submit"); ?>
 </div>

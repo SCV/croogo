@@ -3,7 +3,7 @@
 
     <div class="actions">
         <ul>
-            <li><?php echo $html->link(__('New Link', true), array('action'=>'add', $menu['Menu']['id'])); ?></li>
+            <li><?php echo $this->Html->link(__('New Link', true), array('action'=>'add', $menu['Menu']['id'])); ?></li>
         </ul>
     </div>
 
@@ -14,7 +14,7 @@
             }
         }
 
-        echo $form->create('Link', array(
+        echo $this->Form->create('Link', array(
             'url' => array(
                 'action' => 'process',
                 $menu['Menu']['id'],
@@ -23,7 +23,7 @@
     ?>
     <table cellpadding="0" cellspacing="0">
     <?php
-        $tableHeaders =  $html->tableHeaders(array(
+        $tableHeaders =  $this->Html->tableHeaders(array(
             '',
             __('Id', true),
             __('Title', true),
@@ -34,11 +34,11 @@
 
         $rows = array();
         foreach ($linksTree AS $linkId => $linkTitle) {
-            $actions  = $html->link(__('Move up', true), array('controller' => 'links', 'action' => 'moveup', $linkId));
-            $actions .= ' ' . $html->link(__('Move down', true), array('controller' => 'links', 'action' => 'movedown', $linkId));
-            $actions .= ' ' . $html->link(__('Edit', true), array('controller' => 'links', 'action' => 'edit', $linkId));
-            $actions .= ' ' . $layout->adminRowActions($linkId);
-            $actions .= ' ' . $html->link(__('Delete', true), array(
+            $actions  = $this->Html->link(__('Move up', true), array('controller' => 'links', 'action' => 'moveup', $linkId));
+            $actions .= ' ' . $this->Html->link(__('Move down', true), array('controller' => 'links', 'action' => 'movedown', $linkId));
+            $actions .= ' ' . $this->Html->link(__('Edit', true), array('controller' => 'links', 'action' => 'edit', $linkId));
+            $actions .= ' ' . $this->Layout->adminRowActions($linkId);
+            $actions .= ' ' . $this->Html->link(__('Delete', true), array(
                 'controller' => 'links',
                 'action' => 'delete',
                 $linkId,
@@ -46,21 +46,21 @@
             ), null, __('Are you sure?', true));
 
             $rows[] = array(
-                $form->checkbox('Link.'.$linkId.'.id'),
+                $this->Form->checkbox('Link.'.$linkId.'.id'),
                 $linkId,
                 $linkTitle,
-                $layout->status($linksStatus[$linkId]),
+                $this->Layout->status($linksStatus[$linkId]),
                 $actions,
             );
         }
 
-        echo $html->tableCells($rows);
+        echo $this->Html->tableCells($rows);
         echo $tableHeaders;
     ?>
     </table>
     <div class="bulk-actions">
     <?php
-        echo $form->input('Link.action', array(
+        echo $this->Form->input('Link.action', array(
             'label' => false,
             'options' => array(
                 'publish' => __('Publish', true),
@@ -69,7 +69,7 @@
             ),
             'empty' => true,
         ));
-        echo $form->end(__('Submit', true));
+        echo $this->Form->end(__('Submit', true));
     ?>
     </div>
 </div>

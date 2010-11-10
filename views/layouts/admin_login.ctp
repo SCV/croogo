@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo $title_for_layout; ?> - <?php __('Croogo'); ?></title>
     <?php
-        echo $html->css(array(
+        echo $this->Html->css(array(
             'reset',
             '960',
             'admin',
@@ -18,14 +18,14 @@
     <div id="wrapper" class="login">
         <div id="header">
             <p id="backtosite">
-            <?php echo $html->link(__('Back to', true) . ' ' . Configure::read('Site.title'), '/'); ?>
+            <?php echo $this->Html->link(__('Back to', true) . ' ' . Configure::read('Site.title'), '/'); ?>
             </p>
         </div>
 
         <div id="main">
             <div id="login">
             <?php
-                $layout->sessionFlash();
+                $this->Layout->sessionFlash();
                 echo $content_for_layout;
             ?>
             </div>

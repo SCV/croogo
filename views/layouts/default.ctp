@@ -12,16 +12,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php echo $title_for_layout; ?> &raquo; <?php echo Configure::read('Site.title'); ?></title>
     <?php
-        echo $layout->meta();
-        echo $layout->feed();
-        echo $html->script(array('jquery/jquery.min'));
-        echo $layout->js();
-        echo $html->css(array(
+        echo $this->Layout->meta();
+        echo $this->Layout->feed();
+        echo $this->Html->css(array(
             'reset',
             '960',
             'theme',
         ));
-        echo $html->script(array(
+        echo $this->Layout->js();
+        echo $this->Html->script(array(
+            'jquery/jquery.min',
             'jquery/jquery.hoverIntent.minified',
             'jquery/superfish',
             'jquery/supersubs',
@@ -34,7 +34,7 @@
     <div id="wrapper">
         <div id="header" class="container_16">
             <div class="grid_16">
-                <h1 class="site-title"><?php echo $html->link(Configure::read('Site.title'), '/'); ?></h1>
+                <h1 class="site-title"><?php echo $this->Html->link(Configure::read('Site.title'), '/'); ?></h1>
                 <span class="site-tagline"><?php echo Configure::read('Site.tagline'); ?></span>
             </div>
             <div class="clear"></div>
@@ -42,20 +42,20 @@
 
         <div id="nav">
             <div class="container_16">
-                <?php echo $layout->menu('main', array('dropdown' => true)); ?>
+                <?php echo $this->Layout->menu('main', array('dropdown' => true)); ?>
             </div>
         </div>
 
         <div id="main" class="container_16">
             <div id="content" class="grid_11">
             <?php
-                $layout->sessionFlash();
+                $this->Layout->sessionFlash();
                 echo $content_for_layout;
             ?>
             </div>
 
             <div id="sidebar" class="grid_5">
-            <?php echo $layout->blocks('right'); ?>
+            <?php echo $this->Layout->blocks('right'); ?>
             </div>
 
             <div class="clear"></div>
@@ -67,7 +67,7 @@
                     Powered by <a href="http://www.croogo.org">Croogo</a>.
                 </div>
                 <div class="grid_8 right">
-                    <a href="http://www.cakephp.org"><?php echo $html->image('/img/cake.power.gif'); ?></a>
+                    <a href="http://www.cakephp.org"><?php echo $this->Html->image('/img/cake.power.gif'); ?></a>
                 </div>
                 <div class="clear"></div>
             </div>

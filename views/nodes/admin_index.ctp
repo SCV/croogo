@@ -1,13 +1,13 @@
 <?php
-    $html->script(array('nodes'), false);
+    $this->Html->script(array('nodes'), false);
 ?>
 <div class="nodes index">
     <h2><?php echo $title_for_layout; ?></h2>
 
     <div class="actions">
         <ul>
-            <li><?php echo $html->link(__('Create content', true), array('action'=>'create')); ?></li>
-            <li><?php echo $html->link(__('Filter', true), '#', array('class' => 'filter')); ?></li>
+            <li><?php echo $this->Html->link(__('Create content', true), array('action'=>'create')); ?></li>
+            <li><?php echo $this->Html->link(__('Filter', true), '#', array('class' => 'filter')); ?></li>
         </ul>
     </div>
 
@@ -21,10 +21,10 @@
         echo $this->element('admin/nodes_filter');
     ?>
 
-    <?php echo $form->create('Node', array('url' => array('controller' => 'nodes', 'action' => 'process'))); ?>
+    <?php echo $this->Form->create('Node', array('url' => array('controller' => 'nodes', 'action' => 'process'))); ?>
     <table cellpadding="0" cellspacing="0">
     <?php
-        $tableHeaders =  $html->tableHeaders(array(
+        $tableHeaders =  $this->Html->tableHeaders(array(
             '',
             $paginator->sort('id'),
             $paginator->sort('title'),
@@ -39,18 +39,18 @@
 
         $rows = array();
         foreach ($nodes AS $node) {
-            $actions  = $html->link(__('Edit', true), array('action' => 'edit', $node['Node']['id']));
-            $actions .= ' ' . $layout->adminRowActions($node['Node']['id']);
-            $actions .= ' ' . $html->link(__('Delete', true), array(
+            $actions  = $this->Html->link(__('Edit', true), array('action' => 'edit', $node['Node']['id']));
+            $actions .= ' ' . $this->Layout->adminRowActions($node['Node']['id']);
+            $actions .= ' ' . $this->Html->link(__('Delete', true), array(
                 'action' => 'delete',
                 $node['Node']['id'],
                 'token' => $this->params['_Token']['key'],
             ), null, __('Are you sure?', true));
 
             $rows[] = array(
-                $form->checkbox('Node.'.$node['Node']['id'].'.id'),
+                $this->Form->checkbox('Node.'.$node['Node']['id'].'.id'),
                 $node['Node']['id'],
-                $html->link($node['Node']['title'], array(
+                $this->Html->link($node['Node']['title'], array(
                     'admin' => false,
                     'controller' => 'nodes',
                     'action' => 'view',
@@ -59,21 +59,21 @@
                 )),
                 $node['Node']['type'],
                 $node['User']['username'],
-                $layout->status($node['Node']['status']),
-                $layout->status($node['Node']['promote']),
+                $this->Layout->status($node['Node']['status']),
+                $this->Layout->status($node['Node']['promote']),
                 //$node['Node']['created'],
                 $actions,
             );
         }
 
-        echo $html->tableCells($rows);
+        echo $this->Html->tableCells($rows);
         echo $tableHeaders;
     ?>
     </table>
 
     <div class="bulk-actions">
     <?php
-        echo $form->input('Node.action', array(
+        echo $this->Form->input('Node.action', array(
             'label' => false,
             'options' => array(
                 'publish' => __('Publish', true),
@@ -84,7 +84,7 @@
             ),
             'empty' => true,
         ));
-        echo $form->end(__('Submit', true));
+        echo $this->Form->end(__('Submit', true));
     ?>
     </div>
 </div>

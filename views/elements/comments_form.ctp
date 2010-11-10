@@ -4,8 +4,8 @@
         $type = $types_for_layout[$node['Node']['type']];
 
         if ($this->params['controller'] == 'comments') {
-            $nodeLink = $html->link(__('Go back to original post', true) . ': ' . $node['Node']['title'], $node['Node']['url']);
-            echo $html->tag('p', $nodeLink, array('class' => 'back'));
+            $nodeLink = $this->Html->link(__('Go back to original post', true) . ': ' . $node['Node']['title'], $node['Node']['url']);
+            echo $this->Html->tag('p', $nodeLink, array('class' => 'back'));
         }
 
         $formUrl = array(
@@ -17,34 +17,34 @@
             $formUrl[] = $parentId;
         }
 
-        echo $form->create('Comment', array('url' => $formUrl));
-            if ($session->check('Auth.User.id')) {
-                echo $form->input('Comment.name', array(
+        echo $this->Form->create('Comment', array('url' => $formUrl));
+            if ($this->Session->check('Auth.User.id')) {
+                echo $this->Form->input('Comment.name', array(
                     'label' => __('Name', true),
-                    'value' => $session->read('Auth.User.name'),
+                    'value' => $this->Session->read('Auth.User.name'),
                     'readonly' => 'readonly',
                 ));
-                echo $form->input('Comment.email', array(
+                echo $this->Form->input('Comment.email', array(
                     'label' => __('Email', true),
-                    'value' => $session->read('Auth.User.email'),
+                    'value' => $this->Session->read('Auth.User.email'),
                     'readonly' => 'readonly',
                 ));
-                echo $form->input('Comment.website', array(
+                echo $this->Form->input('Comment.website', array(
                     'label' => __('Website', true),
-                    'value' => $session->read('Auth.User.website'),
+                    'value' => $this->Session->read('Auth.User.website'),
                     'readonly' => 'readonly',
                 ));
-                echo $form->input('Comment.body', array('label' => false));
+                echo $this->Form->input('Comment.body', array('label' => false));
             } else {
-                echo $form->input('Comment.name', array('label' => __('Name', true)));
-                echo $form->input('Comment.email', array('label' => __('Email', true)));
-                echo $form->input('Comment.website', array('label' => __('Website', true)));
-                echo $form->input('Comment.body', array('label' => false));
+                echo $this->Form->input('Comment.name', array('label' => __('Name', true)));
+                echo $this->Form->input('Comment.email', array('label' => __('Email', true)));
+                echo $this->Form->input('Comment.website', array('label' => __('Website', true)));
+                echo $this->Form->input('Comment.body', array('label' => false));
             }
 
             if ($type['Type']['comment_captcha']) {
-                echo $recaptcha->display_form();
+                echo $this->Recaptcha->display_form();
             }
-        echo $form->end(__('Post comment', true));
+        echo $this->Form->end(__('Post comment', true));
     ?>
 </div>

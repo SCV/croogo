@@ -1,24 +1,24 @@
 <div class="node-info">
 <?php
-    $type = $types_for_layout[$layout->node('type')];
+    $type = $types_for_layout[$this->Layout->node('type')];
 
     if ($type['Type']['format_show_author'] || $type['Type']['format_show_date']) {
         __('Posted');
     }
     if ($type['Type']['format_show_author']) {
         echo ' ' . __('by', true) . ' ';
-        if ($layout->node('User.website') != null) {
-            $author = $html->link($layout->node('User.name'), $layout->node('User.website'));
+        if ($this->Layout->node('User.website') != null) {
+            $author = $this->Html->link($this->Layout->node('User.name'), $this->Layout->node('User.website'));
         } else {
-            $author = $layout->node('User.name');
+            $author = $this->Layout->node('User.name');
         }
-        echo $html->tag('span', $author, array(
+        echo $this->Html->tag('span', $author, array(
             'class' => 'author',
         ));
     }
     if ($type['Type']['format_show_date']) {
         echo ' ' . __('on', true) . ' ';
-        echo $html->tag('span', $time->format(Configure::read('Reading.date_time_format'), $layout->node('created'), null, Configure::read('Site.timezone')), array('class' => 'date'));
+        echo $this->Html->tag('span', $this->Time->format(Configure::read('Reading.date_time_format'), $this->Layout->node('created'), null, Configure::read('Site.timezone')), array('class' => 'date'));
     }
 ?>
 </div>
