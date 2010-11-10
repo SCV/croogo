@@ -540,7 +540,7 @@ class LayoutHelper extends AppHelper {
             $menuAlias = $tagMatches[2][$i];
             $options = array();
             for ($j=0; $j < count($attributes[0]); $j++) {
-                $options[$attributes[1][$j]] = $attributes[2][$j];
+                $options[$attributes[1][$j]]=$this->stringOrArrayAttribute($attributes[2][$j]);
             }
             $content = str_replace($tagMatches[0][$i], $this->menu($menuAlias,$options), $content);
         }
@@ -589,6 +589,50 @@ class LayoutHelper extends AppHelper {
             $content = str_replace($tagMatches[0][$i], $this->nodeList($alias,$options), $content);
         }
         return $content;
+    }
+/**
+ * Converts checks wheter to send attribute as string or array
+ *
+ * A string formatted like "Node.type:blog;" will be converted to
+ * array('Node.type' => 'blog'); whereas var="value" will return value
+ *
+ * @param string $string in this format: "Node.type:blog;Node.user_id:1;" or "value"
+ * @return array or string
+ */
+    public function stringOrArrayAttribute($string) {
+        if(strpos($string,':')!==false)
+        {
+            return $this->stringToArray($string);
+        }
+        else
+        {
+            return $string;
+        }
+    }
+/**
+ * Converts formatted string to array
+ *
+ * A string formatted like 'Node.type:blog;' will be converted to
+ * array('Node.type' => 'blog');
+ *
+ * @param string $string in this format: Node.type:blog;Node.user_id:1;
+ * @return array
+ */
+    public function stringToArray($string) {
+        $string = explode(';', $string);
+        $stringArr = array();
+        foreach ($string AS $stringElement) {
+            if ($stringElement != null) {
+                $stringElementE = explode(':', $stringElement);
+                if (isset($stringElementE['1'])) {
+                    $stringArr[$stringElementE['0']] = $stringElementE['1'];
+                } else {
+                    $stringArr[] = $stringElement;
+                }
+            }
+        }
+
+        return $stringArr;
     }
 /**
  * Meta field: with key/value fields
